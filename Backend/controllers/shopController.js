@@ -20,7 +20,7 @@ class ShopController {
     console.log(shop);
     if (!shop)
       return next(ApiErorr.badRequest('Такого магазина не существует'));
-    res.json(shop);
+    return res.json(shop);
   }
 
   async delete(req, res) {}

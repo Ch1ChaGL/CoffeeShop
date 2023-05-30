@@ -7,31 +7,38 @@ class ProductController {
   async createProduct(req, res, next) {
     try {
       const { Name, Description, CategoryId } = req.body;
-      const { Image } = req.files;
+      const { Img } = req.files;
 
-      let fileName = uuid.v4 + '.jpg';
-      Image.mv(path.resolve(__dirname, '..', 'static', fileName));
+      let fileName = uuid.v4() + '.jpg';
+      Img.mv(path.resolve(__dirname, '..', 'static', fileName));
 
       const product = await Product.create({
         Name,
         Description,
-        Image: fileName,
+        Img: fileName,
         CategoryId,
       });
 
       return res.json(product);
     } catch (e) {
-      next(ApiErorr.badRequest(e.message));
+      return next(ApiErorr.badRequest(e.message));
     }
   }
 
   async getAll(req, res) {
-    const products = Product.findAll();
+    const products = await Product.findAll();
     return res.json(products);
   }
   async getAllByCategoryId(req, res) {}
 
-  async getOne(req, res) {}
+  async getOne(req, res, next) {
+    const { id } = req.params;
+    const product = await Product.findByPk(id);
+
+    if (!product) return next(ApiErorr.badRequest('Товара с таким id не существует'));
+
+    return res.json(product);
+  }
 
   async delete(req, res) {}
 }

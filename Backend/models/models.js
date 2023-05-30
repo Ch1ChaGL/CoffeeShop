@@ -38,7 +38,7 @@ const Product = sequelize.define('Product', {
   },
   Name: { type: DataTypes.STRING, unique: true },
   Description: { type: DataTypes.STRING },
-  Image: { type: DataTypes.STRING },
+  Img: { type: DataTypes.STRING },
 });
 
 const Stock = sequelize.define('Stock', {
