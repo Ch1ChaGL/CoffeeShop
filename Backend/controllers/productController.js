@@ -1,24 +1,10 @@
-const uuid = require('uuid');
-const path = require('path');
-const { Product } = require('../models/models');
+const productService = require('../service/productService');
 const ApiErorr = require('../error/ApiError');
 
 class ProductController {
   async createProduct(req, res, next) {
     try {
-      const { Name, Description, CategoryId } = req.body;
-      const { Img } = req.files;
-
-      let fileName = uuid.v4() + '.jpg';
-      Img.mv(path.resolve(__dirname, '..', 'static', fileName));
-
-      const product = await Product.create({
-        Name,
-        Description,
-        Img: fileName,
-        CategoryId,
-      });
-
+      const product = await productService.create(req.body, req.files);
       return res.json(product);
     } catch (e) {
       return next(ApiErorr.badRequest(e.message));
@@ -26,21 +12,38 @@ class ProductController {
   }
 
   async getAll(req, res) {
-    const products = await Product.findAll();
+    const { CategoryId } = req.query;
+    let products;
+    if (!CategoryId) {
+      products = await productService.getAll();
+    } else {
+      products = await productService.getAllByCategoryId(CategoryId);
+    }
+
     return res.json(products);
   }
-  async getAllByCategoryId(req, res) {}
 
   async getOne(req, res, next) {
     const { id } = req.params;
-    const product = await Product.findByPk(id);
+    const product = await productService.getOne(id);
 
-    if (!product) return next(ApiErorr.badRequest('Товара с таким id не существует'));
+    if (!product)
+      return next(ApiErorr.badRequest('Товара с таким id не существует'));
 
     return res.json(product);
   }
 
-  async delete(req, res) {}
+  async delete(req, res, next) {
+    const { id } = req.params;
+
+    if (!id) return next(ApiErorr.badRequest('Не указан id'));
+    const deletedProduct = await productService.delete(id);
+
+    if (!deletedProduct)
+      return next(ApiErorr.badRequest('Не существует продукта с таким id'));
+
+    return res.json({ message: 'Продукт удален' });
+  }
 }
 
 module.exports = new ProductController();

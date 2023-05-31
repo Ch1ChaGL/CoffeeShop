@@ -1,12 +1,9 @@
 const ApiErorr = require('../error/ApiError');
-const { Role } = require('../models/models');
-
+const roleService = require('../service/roleService');
 class RoleController {
   async createRole(req, res, next) {
     try {
-      const { Name, Description } = req.body;
-      const role = await Role.create({ Name, Description });
-
+      const role = await roleService.create(req.body);
       return res.json(role);
     } catch (e) {
       return next(ApiErorr.badRequest(e.message));
@@ -14,19 +11,29 @@ class RoleController {
   }
 
   async getAll(req, res) {
-    const roles = await Role.findAll();
+    const roles = await roleService.findAll();
     return res.json(roles);
   }
 
   async getOne(req, res, next) {
     const { id } = req.params;
-    const role = await Role.findByPk(id);
+    const role = await roleService.findByPk(id);
 
     if (!role) return next(ApiErorr.badRequest('Не существует такой роли'));
     return res.json(role);
   }
 
-  async delete(req, res) {}
+  async delete(req, res, next) {
+    const { id } = req.params;
+
+    if (!id) return next(ApiErorr.badRequest('Не указан id'));
+    const deletedRole = await roleService.delete(id);
+
+    if (!deletedRole)
+      return next(ApiErorr.badRequest('Не существует роли с таким id'));
+
+    return res.json({ message: 'Роль удалена' });
+  }
 }
 
 module.exports = new RoleController();

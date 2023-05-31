@@ -42,6 +42,14 @@ const Product = sequelize.define('Product', {
 });
 
 const Stock = sequelize.define('Stock', {
+  ProductId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+  },
+  ShopId: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+  },
   Count: { type: DataTypes.INTEGER, defaultValue: 0 },
 });
 

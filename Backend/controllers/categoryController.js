@@ -1,28 +1,30 @@
 const ApiErorr = require('../error/ApiError');
-const { Category } = require('../models/models');
+const categoryService = require('../service/categoryService');
 
 class CategoryController {
   async createCategory(req, res) {
-    const { Name, Description } = req.body;
-    const category = await Category.create({ Name, Description });
+    const category = await categoryService.create(req.body);
     return res.json(category);
   }
 
   async getAll(req, res) {
-    const categorys = await Category.findAll();
+    const categorys = await categoryService.findAll();
     return res.json(categorys);
   }
 
   async getOne(req, res, next) {
     const { id } = req.params;
+    const category = await categoryService.getOne(id);
 
-    const category = await Category.findByPk(id);
-
-    if (!category)
-      return next(ApiErorr.badRequest('Не существует такой категории'));
+    if (!category) return next(ApiErorr.badRequest('Не существует такой категории'));
     return res.json(category);
   }
-  async delete(req, res) {}
+  async delete(req, res, next) {
+    const { id } = req.params;
+    const deletedCategory = await categoryService.delete(id);
+    if (!deletedCategory) return next(ApiErorr.badRequest('Категории не существует'));
+    return res.json({ message: 'Категория успешно удалена ' });
+  }
 }
 
 module.exports = new CategoryController();

@@ -1,5 +1,9 @@
+const orderService = require('../service/orderService');
+
 class OrderController {
-  async createOrder(req, res) {}
+  async createOrder(req, res) {
+    
+  }
   async getAll(req, res) {}
   async getAllByUserId() {}
   async getOne(req, res) {}
