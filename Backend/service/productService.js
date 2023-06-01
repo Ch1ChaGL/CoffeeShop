@@ -1,7 +1,7 @@
 const { Product } = require('../models/models');
 const uuid = require('uuid');
 const path = require('path');
-
+const fs = require('fs');
 class ProductService {
   async create(product, img) {
     const { Img } = img;
@@ -27,8 +27,42 @@ class ProductService {
   }
 
   async delete(id) {
-    const deletedProduct = await Product.destroy(id);
+    const { Img } = await Product.findByPk(id);
+    const fileName = Img;
+    const filePath = path.resolve(__dirname, '..', 'static', fileName);
+
+    console.log(fileName);
+    // Проверьте, существует ли файл
+    if (fs.existsSync(filePath)) {
+      // Удалите файл
+      fs.unlinkSync(filePath);
+    }
+
+    const deletedProduct = await Product.destroy({ where: { ProductId: id } });
     return deletedProduct;
+  }
+  async update(id, product, img) {
+    const findedProduct = await Product.findByPk(id);
+    let fileName = findedProduct.dataValues.Img;
+    const { Img } = img;
+
+    console.log(fileName);
+    const filePath = path.resolve(__dirname, '..', 'static', fileName);
+
+    // Проверьте, существует ли файл
+    if (fs.existsSync(filePath)) {
+      // Удалите файл
+      fs.unlinkSync(filePath);
+    }
+
+    fileName = uuid.v4() + '.jpg';
+    Img.mv(path.resolve(__dirname, '..', 'static', fileName));
+
+    const createdProduct = await Product.update(
+      { ...product, Img: fileName },
+      { where: { ProductId: id } },
+    );
+    return createdProduct;
   }
 }
 

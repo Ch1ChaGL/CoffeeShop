@@ -41,6 +41,12 @@ class StockService {
 
     return updatedRows;
   }
+  async updateCount(productId, shopId, count) {
+    const [updatedRows] = await Stock.update(
+      { count },
+      { where: { ProductId, ShopId } },
+    );
+  }
 }
 
 module.exports = new StockService();

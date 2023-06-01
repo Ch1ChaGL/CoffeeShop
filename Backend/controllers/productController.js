@@ -32,7 +32,13 @@ class ProductController {
 
     return res.json(product);
   }
-
+  async update(req, res, next) {
+    const { id } = req.params;
+    const product = await productService.update(id, req.body, req.files);
+    if (!product)
+      return next(ApiErorr.badRequest('Не существует продукта с таким id'));
+    return res.json(product);
+  }
   async delete(req, res, next) {
     const { id } = req.params;
 

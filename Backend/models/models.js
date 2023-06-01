@@ -39,6 +39,7 @@ const Product = sequelize.define('Product', {
   Name: { type: DataTypes.STRING, unique: true },
   Description: { type: DataTypes.STRING },
   Img: { type: DataTypes.STRING },
+  Price: { type: DataTypes.INTEGER, defaultValue: 0 },
 });
 
 const Stock = sequelize.define('Stock', {
@@ -53,11 +54,17 @@ const Stock = sequelize.define('Stock', {
   Count: { type: DataTypes.INTEGER, defaultValue: 0 },
 });
 
-const Order = sequelize.define('Order', {
+const Order = sequelize.define('Orders', {
+  OrderId: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  UserId: { type: DataTypes.INTEGER },
+  Status: { type: DataTypes.INTEGER, defaultValue: 0 },
+  ShopId: { type: DataTypes.INTEGER },
+});
+const OrderProduct = sequelize.define('OrderProduct', {
   OrderId: { type: DataTypes.INTEGER, primaryKey: true },
+  ProductId: { type: DataTypes.INTEGER, primaryKey: true },
   Count: { type: DataTypes.INTEGER, defaultValue: 0 },
 });
-
 // Установка связи между таблицами Product и Stock
 Product.hasMany(Stock, { foreignKey: 'ProductId' });
 Stock.belongsTo(Product, { foreignKey: 'ProductId' });
@@ -78,11 +85,20 @@ User.belongsTo(Role, { foreignKey: 'RoleId' });
 User.hasMany(Order, { foreignKey: 'UserId' });
 Order.belongsTo(User, { foreignKey: 'UserId' });
 
-//Установка связи между таблицами Order и Product
-Product.hasMany(Order, { foreignKey: 'ProductId' });
-Order.belongsTo(Product, { foreignKey: 'ProductId' });
+//Установка связи между таблицами Order и OrderProduct
+Order.hasMany(OrderProduct, { foreignKey: 'OrderId' });
+OrderProduct.belongsTo(Order, { foreignKey: 'OrderId' });
+
+//Установка связи между таблицами Product и OrderProduct
+Product.hasMany(OrderProduct, { foreignKey: 'ProductId' });
+OrderProduct.hasMany(Product, { foreignKey: 'ProductId' });
+
+//Установка связи между таблицами Order и Shop
+Order.belongsTo(Shop, { foreignKey: 'ShopId' });
+Shop.hasMany(Order, { foreignKey: 'ShopId' });
 
 module.exports = {
+  OrderProduct,
   User,
   Shop,
   Category,
