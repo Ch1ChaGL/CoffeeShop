@@ -12,12 +12,15 @@ class ProductController {
   }
 
   async getAll(req, res) {
-    const { CategoryId } = req.query;
+    let { CategoryId, limit, page } = req.query;
+    page = page || 1;
+    limit = limit || 9;
+    let offset = page * limit - limit;
     let products;
     if (!CategoryId) {
-      products = await productService.getAll();
+      products = await productService.getAll(limit, offset);
     } else {
-      products = await productService.getAllByCategoryId(CategoryId);
+      products = await productService.getAllByCategoryId(CategoryId, limit, offset);
     }
 
     return res.json(products);

@@ -12,12 +12,16 @@ class ProductService {
     const createdProduct = await Product.create({ ...product, Img: fileName });
     return createdProduct;
   }
-  async getAll() {
-    const products = await Product.findAll();
+  async getAll(limit, offset) {
+    const products = await Product.findAndCountAll({ limit, offset });
     return products;
   }
-  async getAllByCategoryId(id) {
-    const products = await Product.findAll({ where: { CategoryId: id } });
+  async getAllByCategoryId(id, limit, offset) {
+    const products = await Product.findAndCountAll({
+      where: { CategoryId: id },
+      limit,
+      offset,
+    });
     return products;
   }
 
