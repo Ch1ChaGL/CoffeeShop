@@ -68,6 +68,37 @@ class OrderController {
       return next(new Error(err.message));
     }
   }
+  async close(req, res, next) {
+    try {
+      const { OrderId } = req.query;
+
+      if (!OrderId) return next(ApiErorr.badRequest('Не указан OrderId'));
+
+      const updatedOrder = await orderService.close(OrderId);
+      console.log(updatedOrder);
+
+      if (updatedOrder === 0)
+        return next(ApiErorr.badRequest('Заказ не найден'));
+      return res.json(updatedOrder);
+    } catch (err) {
+      return next(ApiErorr.badRequest(err.message));
+    }
+  }
+  async unclose(req, res, next) {
+    try {
+      const { OrderId } = req.query;
+      if (!OrderId) return next(ApiErorr.badRequest('Не указан OrderId'));
+
+      const updatedOrder = await orderService.unclose(OrderId);
+      console.log(updatedOrder);
+
+      if (updatedOrder === 0)
+        return next(ApiErorr.badRequest('Заказ не найден'));
+      return res.json(updatedOrder);
+    } catch (err) {
+      return next(ApiErorr.badRequest(err.message));
+    }
+  }
 }
 
 module.exports = new OrderController();
