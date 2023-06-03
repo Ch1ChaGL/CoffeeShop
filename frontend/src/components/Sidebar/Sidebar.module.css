@@ -1,0 +1,17 @@
+.container {
+  padding: 20px;
+}
+.link {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+.link:hover {
+  text-decoration: underline;
+}
+.activeLink {
+  color: rgb(129, 84, 30);
+}

@@ -1,0 +1,10 @@
+.buy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  width: 100px;
+  font-weight: bold;
+  background-color: aquamarine;
+  border-radius: 30px;
+}

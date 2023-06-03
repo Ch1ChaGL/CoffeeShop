@@ -8,7 +8,7 @@ class CategoryController {
   }
 
   async getAll(req, res) {
-    const categorys = await categoryService.findAll();
+    const categorys = await categoryService.getAll();
     return res.json(categorys);
   }
 

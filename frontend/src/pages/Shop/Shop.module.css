@@ -1,0 +1,30 @@
+/* Стили для контейнера страницы */
+.pageContainer {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 2fr 10fr;
+  grid-template-rows: 60px 1fr;
+  gap: 20px;
+  grid-template-areas:
+    'search search'
+    'sidebar productsBlock';
+}
+
+/* Стили для полоски сверху */
+.topBar {
+  grid-area: search;
+}
+
+/* Стили для блока сайдбара */
+.sidebar {
+  grid-area: sidebar;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Стили для блока с товарами */
+.productsBlock {
+  grid-area: productsBlock;
+  background-color: #f1f1f1;
+  padding: 20px;
+}

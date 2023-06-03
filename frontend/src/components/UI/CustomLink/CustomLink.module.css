@@ -1,0 +1,14 @@
+.link {
+  font-size: 23px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.activeLink {
+  color: gold;
+}
+.simpleLink {
+  color: black;
+}
+.simpleLink:hover{
+  text-decoration: underline;
+}
