@@ -5,7 +5,10 @@ function ProductCard({ product }) {
   return (
     <div className={s.container}>
       <div className={s.productImage}>
-        <img className={s.img} src={product.Img} />
+        <img
+          className={s.img}
+          src={process.env.REACT_APP_API_URL + product.Img}
+        />
       </div>
       <div className={s.name}>{product.Name}</div>
       <div className={s.description}>{product.Description}</div>

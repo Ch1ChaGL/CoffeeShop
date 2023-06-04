@@ -37,7 +37,7 @@ const Product = sequelize.define('Product', {
     autoIncrement: true,
   },
   Name: { type: DataTypes.STRING, unique: true },
-  Description: { type: DataTypes.STRING },
+  Description: { type: DataTypes.STRING(500) },
   Img: { type: DataTypes.STRING },
   Price: { type: DataTypes.INTEGER, defaultValue: 0 },
 });

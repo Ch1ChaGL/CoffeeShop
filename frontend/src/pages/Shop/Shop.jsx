@@ -4,7 +4,9 @@ import s from './Shop.module.css';
 import MyInput from '../../components/UI/MyInput/MyInput';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import ProductsBlock from '../../components/ProductsBlock/ProductsBlock';
+
 function Shop() {
+  const [category, setCategory] = React.useState(0);
   return (
     <Container>
       <div className={s.pageContainer}>
@@ -12,10 +14,10 @@ function Shop() {
           <MyInput />
         </div>
         <div className={s.sidebar}>
-          <Sidebar />
+          <Sidebar setCategory={setCategory} />
         </div>
         <div className={s.productsBlock}>
-          <ProductsBlock />
+          <ProductsBlock category={category}/>
         </div>
       </div>
     </Container>

@@ -4,6 +4,7 @@ import { AuthContext } from './context/index';
 import { useState } from 'react';
 import Header from './components/Header/Header';
 import './styles/App.css';
+import Footer from './components/Footer/Footer';
 function App() {
   const [isAuth, setIsAuth] = useState(false);
 
@@ -21,7 +22,7 @@ function App() {
             <AppRouter />
           </div>
           <div className='footer'>
-            <footer>Это футер</footer>
+            <Footer />
           </div>
         </BrowserRouter>
       </AuthContext.Provider>
