@@ -6,7 +6,7 @@ class RoleService {
     return createdRole;
   }
   async getAll() {
-    const roles = await Role.getAll();
+    const roles = await Role.findAll();
     return roles;
   }
   async getOne(id) {

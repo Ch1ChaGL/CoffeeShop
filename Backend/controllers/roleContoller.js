@@ -11,7 +11,7 @@ class RoleController {
   }
 
   async getAll(req, res) {
-    const roles = await roleService.findAll();
+    const roles = await roleService.getAll();
     return res.json(roles);
   }
 

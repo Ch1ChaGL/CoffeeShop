@@ -28,8 +28,7 @@ function Navbar() {
       >
         Обратная связь
       </CustomLink>
-      <CustomLink to={LOGIN_ROUTE}>Вход</CustomLink>
-      <CustomLink to={REGISTRATION_ROUTE}>Регистрация</CustomLink>
+      <CustomLink to={LOGIN_ROUTE}>Авторизация</CustomLink>
     </nav>
   );
 }
