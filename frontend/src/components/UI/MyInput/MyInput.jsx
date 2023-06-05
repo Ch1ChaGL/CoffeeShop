@@ -1,11 +1,15 @@
 import React from 'react';
 import s from './MyInput.module.css';
 
-function MyInput(props) {
+function MyInput({ searchQuery, setSearchQuery }) {
   return (
     <div className={s.search}>
-      <input {...props} className={s.input} />
-      <img src='./img/loupe.png' className={s.searchIcon}/>
+      <input
+        value={searchQuery}
+        onChange={event => setSearchQuery(event.target.value)}
+        className={s.input}
+      />
+      <img src='/img/loupe.png' className={s.searchIcon} />
     </div>
   );
 }

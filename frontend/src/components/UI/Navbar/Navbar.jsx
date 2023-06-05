@@ -19,7 +19,7 @@ function Navbar() {
       </CustomLink>
       <CustomLink to={MAIN_ROUTE}>Главная</CustomLink>
       <CustomLink to={ABOUT_ROUTE}>О нас</CustomLink>
-      <CustomLink to={SHOP_ROUTE}>Купить</CustomLink>
+      <CustomLink to={SHOP_ROUTE + '/all'}>Купить</CustomLink>
       <CustomLink
         style={{
           marginRight: '230px',

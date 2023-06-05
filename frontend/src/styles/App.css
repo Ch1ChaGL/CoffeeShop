@@ -96,7 +96,7 @@ h6 {
 .appWrapper {
   min-height: 100%;
   display: grid;
-  grid-template: minmax(70px, auto) 1fr minmax(70px, auto) / 1fr;
+  grid-template: minmax(70px, auto) 1fr minmax(50px, auto) / 1fr;
 }
 .contentWrapper {
   grid-row: 2 / 3;

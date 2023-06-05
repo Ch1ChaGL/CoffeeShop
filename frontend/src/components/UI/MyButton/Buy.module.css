@@ -4,7 +4,13 @@
   justify-content: center;
   padding: 15px;
   width: 100px;
+  color: white;
   font-weight: bold;
-  background-color: aquamarine;
+  background-color: rgb(123, 216, 244);
   border-radius: 30px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+.buy:hover {
+  background-color: rgb(26, 50, 110);
 }

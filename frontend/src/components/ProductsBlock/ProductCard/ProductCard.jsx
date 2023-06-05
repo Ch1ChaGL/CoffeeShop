@@ -1,9 +1,11 @@
 import React from 'react';
 import s from './ProducrCard.module.css';
 import Buy from '../../UI/MyButton/Buy';
+import { Link } from 'react-router-dom';
+import { PRODUCT_ROUTE } from '../../../utils/consts';
 function ProductCard({ product }) {
   return (
-    <div className={s.container}>
+    <Link className={s.container} to={PRODUCT_ROUTE + `/${product.ProductId}`}>
       <div className={s.productImage}>
         <img
           className={s.img}
@@ -21,7 +23,7 @@ function ProductCard({ product }) {
         </div>
         <Buy text={'Купить'} />
       </div>
-    </div>
+    </Link>
   );
 }
 

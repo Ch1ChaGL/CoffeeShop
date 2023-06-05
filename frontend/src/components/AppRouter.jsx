@@ -16,7 +16,7 @@ function AppRouter() {
       {publicRoutes.map(route => (
         <Route key={route.path} path={route.path} element={route.component} />
       ))}
-      <Route path='*' element={<Navigate replace to={SHOP_ROUTE} />} />
+      <Route path='*' element={<Navigate replace to={SHOP_ROUTE + '/all'} />} />
     </Routes>
   );
 }
