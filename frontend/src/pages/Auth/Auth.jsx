@@ -1,23 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import s from './Auth.module.css';
 import { Link } from 'react-router-dom';
 import { REGISTRATION_ROUTE, LOGIN_ROUTE } from '../../utils/consts';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { login, registration } from '../../API/userAPI';
-function Auth() {
+import { observer } from 'mobx-react-lite';
+import { Context } from '../..';
+import { SHOP_ROUTE } from '../../utils/consts';
+
+const Auth = observer(() => {
+  const { user } = useContext(Context);
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  console.log(isLogin);
+  console.log('Это страница логина '+ isLogin);
   const click = async () => {
+    let data;
     if (isLogin) {
-      const response = await login(email, password);
+      data = await login(email, password);
+      console.log(data);
     } else {
-      const response = await registration(email, password);
-      console.log(response);
+      data = await registration(email, password);
+      console.log(data);
     }
+    user.setUser(user);
+    user.setIsAuth(true);
+    console.log(user.isAuth);
+    navigate(SHOP_ROUTE + '/all');
+    console.log('после нажатия');
   };
 
   return (
@@ -69,6 +82,6 @@ function Auth() {
       </div>
     </div>
   );
-}
+});
 
 export default Auth;

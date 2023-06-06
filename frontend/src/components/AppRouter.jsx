@@ -5,10 +5,10 @@ import { SHOP_ROUTE } from '../utils/consts';
 import { useContext } from 'react';
 import { Context } from '..';
 
-
 function AppRouter() {
   const { user } = useContext(Context);
   console.log(user);
+  console.log('авторизирован ли пользователь?', user.isAuth);
   return (
     <Routes>
       {user.isAuth &&

@@ -1,5 +1,8 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Context } from '../../..';
+import { logout } from '../../../API/userAPI';
+import { observer } from 'mobx-react-lite';
 import {
   ABOUT_ROUTE,
   FAQ_ROUTE,
@@ -11,7 +14,16 @@ import {
 import s from './Navbar.module.css';
 import CustomLink from '../CustomLink/CustomLink';
 
-function Navbar() {
+const Navbar = observer(() => {
+  const { user } = useContext(Context);
+  const navigate = useNavigate();
+  const logautClick = () => {
+    logout();
+    user.setIsAuth(false);
+    user.setUser({});
+    navigate('/shop/all');
+  };
+
   return (
     <nav className={s.row}>
       <CustomLink to={MAIN_ROUTE}>
@@ -28,9 +40,17 @@ function Navbar() {
       >
         Обратная связь
       </CustomLink>
-      <CustomLink to={LOGIN_ROUTE}>Авторизация</CustomLink>
+      {user.isAuth ? (
+        <button className={s.logout} onClick={logautClick}>
+          Выход
+        </button>
+      ) : (
+        <button className={s.login} onClick={() => navigate(LOGIN_ROUTE)}>
+          Авторизация
+        </button>
+      )}
     </nav>
   );
-}
+});
 
 export default Navbar;
