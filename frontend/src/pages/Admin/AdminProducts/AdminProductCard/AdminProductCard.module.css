@@ -50,12 +50,20 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
-.buttonDelete{
-    background-color: #be531e;
+.buttonDelete {
+  background-color: #be531e;
 }
-.buttonEdit:hover{
+.buttonEdit:hover {
   background-color: #45a049;
 }
-.buttonDelete:hover{
-    background-color: #6d3113;
+.buttonDelete:hover {
+  background-color: #6d3113;
+}
+
+.price {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
 }

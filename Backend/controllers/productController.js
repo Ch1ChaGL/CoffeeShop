@@ -12,15 +12,20 @@ class ProductController {
   }
 
   async getAll(req, res) {
+    /**
+     * !TODO если делать пагинацию, то надо доделать и шоп и админ панель
+     */
     let { CategoryId, limit, page } = req.query;
-    page = page || 1;
-    limit = limit || 9;
-    let offset = page * limit - limit;
+    // page = page || 1;
+    // limit = limit || 9;
+    // let offset = page * limit - limit;
     let products;
     if (!CategoryId) {
-      products = await productService.getAll(limit, offset);
+      // products = await productService.getAll(limit, offset);
+      products = await productService.getAll();
     } else {
-      products = await productService.getAllByCategoryId(CategoryId, limit, offset);
+      // products = await productService.getAllByCategoryId(CategoryId, limit, offset);
+      products = await productService.getAllByCategoryId();
     }
 
     return res.json(products);

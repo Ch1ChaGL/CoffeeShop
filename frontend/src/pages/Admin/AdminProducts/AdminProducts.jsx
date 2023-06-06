@@ -7,7 +7,8 @@ import ProductService from '../../../API/ProductService';
 import AdminProductCard from './AdminProductCard/AdminProductCard';
 import MyModal from '../../../components/UI/MyModal/MyModal';
 import ProductForm from '../../../components/ProductForm/ProductForm';
-function AdminProducts() {
+import { observer } from 'mobx-react-lite';
+const AdminProducts = () => {
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [modal, setModal] = useState(false);
@@ -32,18 +33,22 @@ function AdminProducts() {
         />
       </div>
       <MyModal visible={modal} setVisible={setModal}>
-        <ProductForm />
+        <ProductForm setVisible={setModal} fetchProducts={fetchProducts} />
       </MyModal>
       <button className={s.add} onClick={() => setModal(true)}>
         Добавить
       </button>
       <div className={s.products}>
         {sortedAndFilteredProducts.map(product => (
-          <AdminProductCard product={product} />
+          <AdminProductCard
+            product={product}
+            products={products}
+            setProducts={setProducts}
+          />
         ))}
       </div>
     </div>
   );
-}
+};
 
 export default AdminProducts;

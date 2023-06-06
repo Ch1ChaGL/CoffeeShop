@@ -8,7 +8,8 @@ import { useLocation } from 'react-router-dom';
 import AdminProducts from './AdminProducts/AdminProducts';
 import AdminCategory from './AdminCategory/AdminCategory';
 import AdminOrders from './AdminOrders/AdminOrders';
-function Admin() {
+import { observer } from 'mobx-react-lite';
+const Admin = () => {
   const location = useLocation();
   const page = location.pathname.split('/').slice(-1)[0];
 
@@ -38,6 +39,6 @@ function Admin() {
       </div>
     </Container>
   );
-}
+};
 
 export default Admin;

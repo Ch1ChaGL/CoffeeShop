@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import styles from './ProductForm.module.css';
 import CategoryService from '../../API/CategoryService';
-function ProductForm() {
+import ProductService from '../../API/ProductService';
+
+function ProductForm({ setVisible, fetchProducts }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
@@ -20,11 +22,26 @@ function ProductForm() {
     setCategories(category);
   }
 
-  const handleSubmit = event => {
+  const createProduct = event => {
     event.preventDefault();
-    // Обработка отправки формы
-    // Можно вызвать функцию для создания продукта или выполнить другую логику
-    console.log('Submitted:', name, description, price, image);
+
+    const formData = new FormData();
+    formData.append('Name', name);
+    formData.append('Description', description);
+    formData.append('Price', price);
+    formData.append('CategoryId', category);
+    formData.append('Img', image);
+    ProductService.createProduct(formData)
+      .catch(err => console.log(err))
+      .finally(() => {
+        setVisible(false);
+        fetchProducts();
+      });
+  };
+  const handleSubmit = async event => {
+    event.preventDefault();
+
+    console.log(name, description, price, parseInt(category), image);
   };
 
   return (
@@ -90,7 +107,11 @@ function ProductForm() {
           required
         />
       </div>
-      <button type='submit' className={styles.submitButton}>
+      <button
+        type='submit'
+        className={styles.submitButton}
+        onClick={createProduct}
+      >
         Создать
       </button>
     </form>
