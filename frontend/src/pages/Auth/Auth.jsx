@@ -21,12 +21,13 @@ const Auth = observer(() => {
     let data;
     if (isLogin) {
       data = await login(email, password);
+      console.log('При логине вот это выходит: ');
       console.log(data);
     } else {
       data = await registration(email, password);
       console.log(data);
     }
-    user.setUser(user);
+    user.setUser(data);
     user.setIsAuth(true);
     console.log(user.isAuth);
     navigate(SHOP_ROUTE + '/all');

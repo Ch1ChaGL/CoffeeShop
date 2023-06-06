@@ -14,20 +14,21 @@ const App = observer(() => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('При обновлении страницы' + user.isAuth);
-    check()
-      .then(data => {
-        console.log('я попал сюда');
-        user.setUser(data);
-        user.setIsAuth(true);
-      })
-      .catch(() => {
-        user.setUser({});
-        user.setIsAuth(false);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    setTimeout(() => {
+      check()
+        .then(data => {
+          console.log('я попал сюда');
+          user.setUser(data);
+          user.setIsAuth(true);
+        })
+        .catch(() => {
+          user.setUser({});
+          user.setIsAuth(false);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }, 1000);
   }, []);
 
   if (loading) {

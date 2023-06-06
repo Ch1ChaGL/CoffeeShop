@@ -5,6 +5,7 @@ import { logout } from '../../../API/userAPI';
 import { observer } from 'mobx-react-lite';
 import {
   ABOUT_ROUTE,
+  ADMIN_ROUTE,
   FAQ_ROUTE,
   LOGIN_ROUTE,
   MAIN_ROUTE,
@@ -23,7 +24,7 @@ const Navbar = observer(() => {
     user.setUser({});
     navigate('/shop/all');
   };
-
+  console.log('Роль юзера ' + user.getRole);
   return (
     <nav className={s.row}>
       <CustomLink to={MAIN_ROUTE}>
@@ -40,6 +41,15 @@ const Navbar = observer(() => {
       >
         Обратная связь
       </CustomLink>
+
+      {user.getRole === 1 ? (
+        <button className={s.admin} onClick={() => navigate(ADMIN_ROUTE)}>
+          Админ панель
+        </button>
+      ) : (
+        <></>
+      )}
+
       {user.isAuth ? (
         <button className={s.logout} onClick={logautClick}>
           Выход

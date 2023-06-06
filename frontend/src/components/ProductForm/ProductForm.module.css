@@ -1,0 +1,80 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.formGroup {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: none;
+}
+
+.submitButton {
+  padding: 10px 20px;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #0056b3;
+}
+
+/* Добавляем стили для выпадающего меню */
+.selectWrapper {
+  position: relative;
+}
+
+.selectWrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  border-color: #999999 transparent transparent transparent;
+  pointer-events: none;
+}
+
+.selectField {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #999999;
+  appearance: none;
+  background-color: transparent;
+  background-image: linear-gradient(to bottom, #ffffff, #f1f1f1);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  cursor: pointer;
+}
+
+.selectField:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Применяем стили к опциям выпадающего меню */
+.selectField option {
+  padding: 10px;
+  background-color: #ffffff;
+  color: #333333;
+}

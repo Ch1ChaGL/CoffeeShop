@@ -4,31 +4,28 @@
   display: grid;
   grid-template-columns: 2fr 10fr;
   grid-template-rows: 60px 1fr;
-  gap: 30px;
+  gap: 20px;
   grid-template-areas:
-    'search search'
-    'sidebar productsBlock';
-}
-
-/* Стили для полоски сверху */
-.topBar {
-  grid-area: search;
-  margin-bottom: 310px;
+    'sidebar content'
+    'sidebar content';
 }
 
 /* Стили для блока сайдбара */
 .sidebar {
   grid-area: sidebar;
-  border-radius: 30px;
-
-  background-color: #4b95ce;
+  background-color: #041f5c;
+  border-radius: 15px;
   padding: 20px;
 }
 
 /* Стили для блока с товарами */
-.productsBlock {
+.contentBlock {
+  height: 100%;
+  grid-area: content;
+  background-color: #407a97;
   border-radius: 30px;
-  grid-area: productsBlock;
-  background-color: #92c1ce;
   padding: 20px;
+}
+.page {
+  height: 100%;
 }

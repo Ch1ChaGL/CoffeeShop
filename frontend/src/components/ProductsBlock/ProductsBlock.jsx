@@ -14,7 +14,6 @@ function ProductsBlock({ searchQuery }) {
 
   useEffect(() => {
     fetchProducts();
-    console.log('Работает только при монтировании');
   }, []);
 
   async function fetchProducts() {

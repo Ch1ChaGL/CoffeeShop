@@ -17,7 +17,6 @@ export const useProducts = (products, sort, query) => {
   const sortedProducts = useSortedProducts(products, sort);
   console.log(sortedProducts);
   const sortedAndFiltered = useMemo(() => {
-    console.log('Только при обновлении сортировки или строки запроса');
     return sortedProducts.filter(product =>
       product.Name.toLowerCase().includes(query.toLowerCase()),
     );
