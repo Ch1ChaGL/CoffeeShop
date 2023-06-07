@@ -9,7 +9,6 @@ const $authHost = axios.create({
 });
 
 const authInterceptor = config => {
-  console.log(`Bearer ${localStorage.getItem('jwtToken')}`);
   config.headers.Authorization = `Bearer ${localStorage.getItem('jwtToken')}`;
   return config;
 };

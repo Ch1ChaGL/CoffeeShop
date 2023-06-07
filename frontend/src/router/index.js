@@ -21,6 +21,7 @@ import {
   SHOP_ROUTE,
   FAQ_ROUTE,
 } from '../utils/consts';
+import ChangeProduct from '../pages/Admin/AdminProducts/AdminProductCard/ChangeProduct/ChangeProduct';
 
 export const authRoutes = [{ path: BASKET_ROUTE, component: <Basket /> }];
 
@@ -30,6 +31,10 @@ export const adminRoutes = [
     path: ADMIN_ROUTE + '/products',
     component: <Admin />,
     name: 'Товары',
+  },
+  {
+    path: ADMIN_ROUTE + '/products/:id',
+    component: <ChangeProduct />,
   },
   {
     path: ADMIN_ROUTE + '/category',

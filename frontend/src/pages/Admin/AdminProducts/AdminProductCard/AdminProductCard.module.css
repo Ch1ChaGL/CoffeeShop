@@ -6,6 +6,14 @@
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
+  cursor: pointer;
+  transition: transform 0.3s ease , background-color 0.3s ease;
+}
+.card:hover{
+  transform: translateY(-5px);
+}
+.card:active{
+  background-color: #b9b7b7;
 }
 
 .image {
@@ -35,6 +43,7 @@
 
 .buttons {
   display: flex;
+  justify-content: space-between;
 }
 
 .buttonEdit,
@@ -66,4 +75,15 @@
   font-size: 24px;
   font-weight: bold;
   color: #333;
+}
+
+.count {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  color: #333;
+}
+.rightContent{
+  display: flex;
+  gap: 30px
 }

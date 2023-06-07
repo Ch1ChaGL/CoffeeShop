@@ -107,3 +107,24 @@ h6 {
   grid-row: 3 / 4;
   /* Дополнительные стили для футера вашего приложения */
 }
+
+/* Стили для полоски прокрутки */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Стили для трека */
+::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Стили для ползунка */
+::-webkit-scrollbar-thumb {
+  background-color: #3d427c;
+  border-radius: 4px;
+}
+
+/* Стили для ползунка при наведении */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #97bace;
+}
