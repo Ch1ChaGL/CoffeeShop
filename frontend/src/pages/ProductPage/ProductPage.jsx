@@ -4,6 +4,7 @@ import Buy from '../../components/UI/MyButton/Buy';
 import { useLocation } from 'react-router-dom';
 import ProductService from '../../API/ProductService';
 import { useState, useEffect } from 'react';
+import Spinner from '../../components/UI/Spinner/Spinner';
 
 function ProductPage() {
   const [product, setProduct] = useState({});
@@ -18,6 +19,10 @@ function ProductPage() {
   async function fetchProduct(id) {
     const products = await ProductService.getProductById(id);
     setProduct(products);
+  }
+
+  if (!product.Img) {
+    return <Spinner />;
   }
 
   return (

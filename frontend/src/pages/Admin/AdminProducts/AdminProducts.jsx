@@ -7,11 +7,13 @@ import ProductService from '../../../API/ProductService';
 import AdminProductCard from './AdminProductCard/AdminProductCard';
 import MyModal from '../../../components/UI/MyModal/MyModal';
 import ProductForm from '../../../components/ProductForm/ProductForm';
-import { observer } from 'mobx-react-lite';
+
 const AdminProducts = () => {
+  const [sort, setSort] = useState('all');
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [modal, setModal] = useState(false);
+
   useEffect(() => {
     fetchProducts();
   }, []);
@@ -21,8 +23,8 @@ const AdminProducts = () => {
     setProducts(products);
   }
 
-  const sortedAndFilteredProducts = useProducts(products, 'all', searchQuery);
-
+  const sortedAndFilteredProducts = useProducts(products, sort, searchQuery);
+  console.log(sortedAndFilteredProducts);
   return (
     <div className={s.container}>
       <div className={s.topBar}>
@@ -38,12 +40,22 @@ const AdminProducts = () => {
       <button className={s.add} onClick={() => setModal(true)}>
         Добавить
       </button>
+      <button className={s.sortButton} onClick={() => setSort('Name')}>
+        Сортировать по имени
+      </button>
+      <button className={s.sortButton} onClick={() => setSort('PriceUp')}>
+        Сначала дорогие
+      </button>
+      <button className={s.sortButton} onClick={() => setSort('PriceDown')}>
+        Сначала дешевые
+      </button>
       <div className={s.products}>
         {sortedAndFilteredProducts.map(product => (
           <AdminProductCard
             product={product}
             products={products}
             setProducts={setProducts}
+            key={product.ProductId}
           />
         ))}
       </div>

@@ -2,6 +2,8 @@ const { Product } = require('../models/models');
 const uuid = require('uuid');
 const path = require('path');
 const fs = require('fs');
+const stockService = require('../service/stockService');
+const shopService = require('../service/shopService');
 class ProductService {
   async create(product, img) {
     const { Img } = img;
@@ -10,6 +12,17 @@ class ProductService {
 
     console.log(product);
     const createdProduct = await Product.create({ ...product, Img: fileName });
+
+    const shops = await shopService.getAll();
+    shops.map(async shop => {
+      const stock = {
+        ShopId: shop.ShopId,
+        ProductId: createdProduct.ProductId,
+        Count: 0,
+      };
+      await stockService.create(stock);
+    });
+
     return createdProduct;
   }
   async getAll(limit, offset) {
@@ -64,6 +77,18 @@ class ProductService {
 
     const createdProduct = await Product.update(
       { ...product, Img: fileName },
+      { where: { ProductId: id } },
+    );
+    return createdProduct;
+  }
+  async update(id, product) {
+    const createdProduct = await Product.update(
+      {
+        Name: product.Name,
+        Description: product.Description,
+        Price: product.Price,
+        CategoryId: product.CategoryId,
+      },
       { where: { ProductId: id } },
     );
     return createdProduct;

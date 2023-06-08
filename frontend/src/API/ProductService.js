@@ -17,4 +17,11 @@ export default class ProductService {
     const response = $authHost.delete(`api/product/${id}`);
     return response.data;
   };
+  static updateProduct = async product => {
+    const response = await $authHost.put(
+      `api/product/${product.ProductId}`,
+      product,
+    );
+    return response.data;
+  };
 }

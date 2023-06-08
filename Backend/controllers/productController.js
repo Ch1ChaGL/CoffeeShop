@@ -5,6 +5,7 @@ class ProductController {
   async createProduct(req, res, next) {
     try {
       const product = await productService.create(req.body, req.files);
+      
       return res.json(product);
     } catch (e) {
       return next(ApiErorr.badRequest(e.message));
@@ -42,7 +43,13 @@ class ProductController {
   }
   async update(req, res, next) {
     const { id } = req.params;
-    const product = await productService.update(id, req.body, req.files);
+    let product;
+    if (!req.files) {
+      product = await productService.update(id, req.body);
+    } else {
+      product = await productService.update(id, req.body, req.files);
+    }
+
     if (!product)
       return next(ApiErorr.badRequest('Не существует продукта с таким id'));
     return res.json(product);

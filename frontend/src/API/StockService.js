@@ -1,4 +1,4 @@
-import { $host } from '.';
+import { $host, $authHost } from '.';
 
 export default class StockService {
   static async getAllCountProductByIdProduct(ProductId) {
@@ -9,5 +9,19 @@ export default class StockService {
     console.log(`ProductId ${ProductId} = ` + count);
     return count;
   }
-  static getCountProductByIdShopAndProduct(ShopId, ProductId) {}
+  static async getCountProductByIdShopAndProduct(ShopId, ProductId) {
+    const { data } = await $host.get(
+      `api/stock?ShopId=${ShopId}&ProductId=${ProductId}`,
+    );
+    console.log(data[0].Count);
+    return data[0].Count;
+  }
+  static async updateCount(ShopId, ProductId, Count) {
+    const response = await $authHost.put(`api/stock`, {
+      ShopId,
+      ProductId,
+      Count,
+    });
+    return response.data;
+  }
 }

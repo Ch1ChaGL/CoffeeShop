@@ -8,7 +8,7 @@ class ShopController {
   }
 
   async getAll(req, res) {
-    const shops = await shopService.findAll();
+    const shops = await shopService.getAll();
     return res.json(shops);
   }
 
