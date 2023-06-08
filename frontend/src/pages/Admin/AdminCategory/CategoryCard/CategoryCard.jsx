@@ -1,8 +1,14 @@
 import React from 'react';
 import s from './CategoryCard.module.css';
-function CategoryCard({ category }) {
+import CategoryService from '../../../../API/CategoryService';
+function CategoryCard({ category, categorys, setCategorys }) {
   console.log('Category card');
   console.log(category);
+
+  const deleteCategory1 = async () => {
+    await CategoryService.deleteCategory(category.CategoryId);
+    setCategorys(categorys.filter(c => c.CategoryId !== category.CategoryId));
+  };
   return (
     <div className={s.card}>
       <div className={s.content}>
@@ -12,7 +18,9 @@ function CategoryCard({ category }) {
         </div>
         <div className={s.buttons}>
           <div>
-            <button className={s.buttonDelete}>Удалить</button>
+            <button className={s.buttonDelete} onClick={deleteCategory1}>
+              Удалить
+            </button>
           </div>
         </div>
       </div>

@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import s from './AdminCategory.module.css';
 import CategoryCard from './CategoryCard/CategoryCard';
 import CategoryService from '../../../API/CategoryService';
+import MyModal from '../../../components/UI/MyModal/MyModal';
+import CategoryForm from '../../../components/CategoryForm/CategoryForm';
 function AdminCategory() {
   const [categorys, setCategorys] = useState([]);
+  const [modal, setModal] = useState(false);
   useEffect(() => {
     fetchCategory();
   }, []);
@@ -15,9 +18,19 @@ function AdminCategory() {
 
   return (
     <div>
-      <button className={s.add}>Добавить</button>
+      <MyModal visible={modal} setVisible={setModal}>
+        <CategoryForm setVisible={setModal} fetchCategory={fetchCategory} />
+      </MyModal>
+      <button className={s.add} onClick={() => setModal(true)}>
+        Добавить
+      </button>
       {categorys.map(category => (
-        <CategoryCard category={category} key={category.ProductId} />
+        <CategoryCard
+          category={category}
+          categorys={categorys}
+          setCategorys={setCategorys}
+          key={category.ProductId}
+        />
       ))}
     </div>
   );

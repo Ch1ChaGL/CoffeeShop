@@ -74,7 +74,7 @@ Shop.hasMany(Stock, { foreignKey: 'ShopId' });
 Stock.belongsTo(Shop, { foreignKey: 'ShopId' });
 
 //Установка связи между таблицами Category и Product
-Category.hasMany(Product, { foreignKey: 'CategoryId' });
+Category.hasMany(Product, { foreignKey: 'CategoryId', onDelete: 'CASCADE' });
 Product.belongsTo(Category, { foreignKey: 'CategoryId' });
 
 //Установка связи между таблицами Role и User
