@@ -25,6 +25,8 @@ const AdminProducts = () => {
 
   const sortedAndFilteredProducts = useProducts(products, sort, searchQuery);
   console.log(sortedAndFilteredProducts);
+
+  
   return (
     <div className={s.container}>
       <div className={s.topBar}>

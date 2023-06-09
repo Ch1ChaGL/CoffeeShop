@@ -1,5 +1,5 @@
 const sequelize = require('../db');
-const { Order } = require('../models/models');
+const { Order, User, Shop } = require('../models/models');
 const { OrderProduct } = require('../models/models');
 const { Stock } = require('../models/models');
 const stockService = require('./stockService');
@@ -45,6 +45,14 @@ class OrderService {
           model: OrderProduct,
           attributes: ['ProductId', 'Count'],
         },
+        {
+          model: Shop,
+          attributes: ['Address'],
+        },
+        {
+          model: User, // Добавляем ассоциацию с моделью User
+          attributes: ['Email', 'FirstName', 'LastName'], // Включаем поле Email в атрибуты модели User
+        },
       ],
     });
 
@@ -62,6 +70,14 @@ class OrderService {
           model: OrderProduct,
           attributes: ['ProductId', 'Count'],
         },
+        {
+          model: Shop,
+          attributes: ['Address'],
+        },
+        {
+          model: User, // Добавляем ассоциацию с моделью User
+          attributes: ['Email', 'FirstName', 'LastName'], // Включаем поле Email в атрибуты модели User
+        },
       ],
     });
     return orders;
@@ -73,6 +89,34 @@ class OrderService {
         {
           model: OrderProduct,
           attributes: ['ProductId', 'Count'],
+        },
+        {
+          model: Shop,
+          attributes: ['Address'],
+        },
+        {
+          model: User, // Добавляем ассоциацию с моделью User
+          attributes: ['Email', 'FirstName', 'LastName'], // Включаем поле Email в атрибуты модели User
+        },
+      ],
+    });
+    return orders;
+  }
+  async getAllByShopId(id) {
+    const orders = await Order.findAll({
+      where: { ShopId: id },
+      include: [
+        {
+          model: OrderProduct,
+          attributes: ['ProductId', 'Count'],
+        },
+        {
+          model: Shop,
+          attributes: ['Address'],
+        },
+        {
+          model: User, // Добавляем ассоциацию с моделью User
+          attributes: ['Email', 'FirstName', 'LastName'], // Включаем поле Email в атрибуты модели User
         },
       ],
     });

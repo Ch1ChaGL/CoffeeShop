@@ -5,4 +5,8 @@ export default class ShopService {
     const response = await $host.get(`/api/shop`);
     return response.data;
   }
+  static async getShopById(id) {
+    const response = await $host.get(`/api/shop/${id}`);
+    return response.data;
+  }
 }

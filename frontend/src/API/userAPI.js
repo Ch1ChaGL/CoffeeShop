@@ -30,3 +30,8 @@ export const check = async () => {
 export const logout = () => {
   localStorage.removeItem('jwtToken');
 };
+
+export const getUserById = async id => {
+  const response = await $authHost.get(`api/user/${id}`);
+  return response.data;
+};

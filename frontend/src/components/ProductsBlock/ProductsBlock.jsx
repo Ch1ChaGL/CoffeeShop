@@ -6,8 +6,7 @@ import ProductService from '../../API/ProductService';
 import { useLocation } from 'react-router-dom';
 import { useProducts } from '../../hooks/useProducts';
 
-
-function ProductsBlock({ searchQuery }) {
+function ProductsBlock({ searchQuery, sort }) {
   const location = useLocation();
   const category = location.pathname.split('/').slice(-1)[0];
   const [products, setProducts] = useState([]);
@@ -26,10 +25,15 @@ function ProductsBlock({ searchQuery }) {
     category,
     searchQuery,
   );
+  const filteredProducts = useProducts(
+    sortedAndFilteredProducts,
+    sort,
+    searchQuery,
+  );
 
   return (
     <div className={s.gridСontainer}>
-      {sortedAndFilteredProducts.map(product => (
+      {filteredProducts.map(product => (
         <ProductCard key={product.ProductId} product={product} />
       ))}
     </div>

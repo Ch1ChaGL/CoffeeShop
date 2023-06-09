@@ -36,7 +36,7 @@ function ShopCard({ shop, product }) {
 
   return (
     <>
-      {isSave ? <SaveModal setIsSave={setIsSave} /> : null}
+      {isSave ? <SaveModal setIsSave={setIsSave}>Успешно сохранено!</SaveModal> : null}
       <div className={s['shopsContainer']}>
         <div className={s['shops']}>
           <div className={s['address']}>{shop.Address}</div>

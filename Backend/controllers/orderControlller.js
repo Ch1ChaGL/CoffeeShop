@@ -25,7 +25,16 @@ class OrderController {
   async getAll(req, res, next) {
     try {
       let orders = null;
-      const { UserId, OrderId } = req.query;
+      const { UserId, OrderId, ShopId } = req.query;
+      if (ShopId) {
+        orders = await orderService.getAllByShopId(ShopId);
+        if (orders.length === 0)
+          return next(
+            ApiErorr.badRequest(
+              `Заказы данного пользователя (${UserId}) не найдены`,
+            ),
+          );
+      }
       if (UserId) {
         orders = await orderService.getAllByUserId(UserId);
         if (orders.length === 0)
@@ -38,7 +47,7 @@ class OrderController {
       if (OrderId) {
         orders = await orderService.getOneByOrderId(OrderId);
       }
-      if (!OrderId && !UserId) orders = await orderService.getAll();
+      if (!OrderId && !UserId && !ShopId) orders = await orderService.getAll();
       if (orders.length === 0)
         return next(ApiErorr.badRequest('Заказы не найдены'));
       return res.json(orders);

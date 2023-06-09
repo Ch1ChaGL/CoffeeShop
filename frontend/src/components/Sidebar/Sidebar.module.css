@@ -15,3 +15,31 @@
 .activeLink {
   color: rgb(129, 84, 30);
 }
+
+.sortBy {
+  width: 100%;
+  display: block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  background-color: #2c80ad;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+.sortBy:hover {
+  background-color: #3687b0;
+}
+
+.sortBy:focus {
+  outline: none;
+}
+
+.sortBy:active {
+  background-color: #266d8a;
+}

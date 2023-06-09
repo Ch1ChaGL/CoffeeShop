@@ -8,7 +8,7 @@ import ProductsBlock from '../../components/ProductsBlock/ProductsBlock';
 
 function Shop() {
   const [searchQuery, setSearchQuery] = useState('');
-
+  const [sort, setSort] = useState('all');
   return (
     <Container>
       <div className={s.pageContainer}>
@@ -20,10 +20,10 @@ function Shop() {
           />
         </div>
         <div className={s.sidebar}>
-          <Sidebar />
+          <Sidebar setSort={setSort} />
         </div>
         <div className={s.productsBlock}>
-          <ProductsBlock searchQuery={searchQuery}/>
+          <ProductsBlock searchQuery={searchQuery} sort={sort} />
         </div>
       </div>
     </Container>

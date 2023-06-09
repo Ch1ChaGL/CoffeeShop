@@ -1,0 +1,32 @@
+.buttons {
+  display: flex;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.button {
+  padding: 20px 30px 20px 30px;
+  font-size: 25px;
+  color: white;
+  border-radius: 10px;
+  margin-right: 30px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.newOrder {
+  background-color: #27ae60;
+}
+.oldOrder {
+  background-color: #e74c3c;
+}
+.newOrder:hover {
+  background-color: #186e3c;
+}
+.oldOrder:hover {
+  background-color: #a13327;
+}
+.all{
+  background-color: #2850b7;
+}
+.all:hover{
+  background-color: #193886;
+}

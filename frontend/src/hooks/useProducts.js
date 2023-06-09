@@ -24,8 +24,6 @@ export const useSortedProducts = (products, sort) => {
 
 export const useProducts = (products, sort, query) => {
   const sortedProducts = useSortedProducts(products, sort);
-  console.log('Сортировнный в хуке ');
-  console.log(sortedProducts);
   const sortedAndFiltered = useMemo(() => {
     return sortedProducts.filter(product =>
       product.Name.toLowerCase().includes(query.toLowerCase()),

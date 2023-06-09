@@ -10,10 +10,12 @@ class UserService {
     return user;
   }
 
- 
-
   async login() {}
   async check() {}
+  async getById(id) {
+    const user = await User.findOne({ where: { UserId: id } });
+    return user;
+  }
 }
 
 module.exports = new UserService();

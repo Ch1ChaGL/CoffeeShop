@@ -56,7 +56,9 @@ function ChangeProduct() {
 
   return (
     <Container>
-      {isSave ? <SaveModal setIsSave={setIsSave} /> : null}
+      {isSave ? (
+        <SaveModal setIsSave={setIsSave}>Успешно сохранено!</SaveModal>
+      ) : null}
       <div className={s['container']}>
         <div className={s['image']}>
           <img

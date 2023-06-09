@@ -24,4 +24,12 @@ export default class ProductService {
     );
     return response.data;
   };
+  static getCosts = async orderProducts => {
+    let total = 0;
+    for (const item of orderProducts) {
+      const { Price } = await ProductService.getProductById(item.ProductId);
+      total += Price * item.Count;
+    }
+    return total;
+  };
 }

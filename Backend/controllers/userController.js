@@ -78,6 +78,11 @@ class UserController {
     return res.json({ token });
   }
   async delete(req, res, next) {}
+  async getById(req, res, next) {
+    const { id } = req.params;
+    const user = await userService.getById(id);
+    return res.json(user);
+  }
 }
 
 module.exports = new UserController();

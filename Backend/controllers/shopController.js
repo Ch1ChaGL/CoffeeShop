@@ -14,7 +14,7 @@ class ShopController {
 
   async getOne(req, res, next) {
     const { id } = req.params;
-    const shop = await shopService.findByPk(id);
+    const shop = await shopService.getOne(id);
     console.log(shop);
     if (!shop)
       return next(ApiErorr.badRequest('Такого магазина не существует'));

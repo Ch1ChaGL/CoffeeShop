@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import s from './SaveModal.module.css';
 
-function SaveModal({ setIsSave }) {
+function SaveModal({ setIsSave, children, error }) {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -15,11 +15,10 @@ function SaveModal({ setIsSave }) {
     }, 1000);
     return () => clearTimeout(timer);
   }, []);
-
   return (
     <div className={`${s.modal} ${showModal ? s.show : s.close}`}>
-      <div className={s.modalContent}>
-        <span>Успешно сохранено!</span>
+      <div className={`${s.modalContent} ${error === true ? s.err : ''}`}>
+        <span>{children}</span>
       </div>
     </div>
   );
