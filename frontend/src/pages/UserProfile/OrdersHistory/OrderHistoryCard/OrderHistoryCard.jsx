@@ -1,19 +1,12 @@
-import React, { useEffect, useState, useContext } from 'react';
-import s from './AdminOrderCard.module.css';
+import React, { useState, useEffect } from 'react';
+import s from './OrderHistoryCard.module.css';
 import ShopService from '../../../../API/ShopService';
 import ProductService from '../../../../API/ProductService';
-import { getUserById } from '../../../../API/userAPI';
-import { useNavigate } from 'react-router-dom';
-import { ADMIN_ROUTE } from '../../../../utils/consts';
-import { Context } from '../../../..';
-function AdminOrder({ order }) {
-  const [address, setAddress] = useState('');
-  const [customerEmail, setCustomerEmail] = useState('');
+function OrderHistoryCard({ order }) {
   const [orderCost, setOrderCost] = useState(0);
-  const navigate = useNavigate();
   const isoDate = order.createdAt;
   const date = new Date(isoDate);
-  const { user } = useContext(Context);
+  const [address, setAddress] = useState('');
   const options = {
     year: 'numeric',
     month: 'long',
@@ -28,17 +21,12 @@ function AdminOrder({ order }) {
 
   useEffect(() => {
     fetchAddress();
-    fetchCustomerEmail();
     fetchCost();
   }, []);
 
   const fetchAddress = async () => {
     const response = await ShopService.getShopById(order.ShopId);
     setAddress(response.Address);
-  };
-  const fetchCustomerEmail = async () => {
-    const response = await getUserById(order.UserId, user.user);
-    setCustomerEmail(response.Email);
   };
   const fetchCost = async () => {
     const costs = await ProductService.getCosts(order.OrderProducts);
@@ -51,7 +39,6 @@ function AdminOrder({ order }) {
         <div className={s.about}>
           <h3 className={s.name}>Заказ номер: {order.OrderId}</h3>
           <p className={s.description}>Адрес: {address}</p>
-          <p className={s.description}>Email: {customerEmail}</p>
         </div>
         <div className={s.status}>
           {order.Status === 0 ? (
@@ -67,19 +54,9 @@ function AdminOrder({ order }) {
             currency: 'RUB',
           }).format(orderCost)}
         </div>
-        <div className={s.buttons}>
-          <div>
-            <button
-              className={s.check}
-              onClick={() => navigate(ADMIN_ROUTE + `/orders/${order.OrderId}`)}
-            >
-              Просмотреть
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
 }
 
-export default AdminOrder;
+export default OrderHistoryCard;

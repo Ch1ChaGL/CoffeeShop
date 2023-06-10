@@ -14,6 +14,13 @@
   height: 200px;
   margin-bottom: 30px;
 }
+.buyGroup {
+  display: flex;
+}
+.count {
+  width: 60px;
+  margin-right: 15px;
+}
 .name {
   color: blanchedalmond;
   text-align: left;

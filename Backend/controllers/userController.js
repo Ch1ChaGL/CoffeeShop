@@ -80,7 +80,15 @@ class UserController {
   async delete(req, res, next) {}
   async getById(req, res, next) {
     const { id } = req.params;
-    const user = await userService.getById(id);
+    const { RoleId } = req.body;
+    const user = await userService.getById(id, RoleId);
+    return res.json(user);
+  }
+  async updateByid(req, res, next) {
+    const { id } = req.params;
+    const { FirstName, LastName } = req.body;
+
+    const user = await userService.updateById(id, FirstName, LastName);
     return res.json(user);
   }
 }

@@ -7,7 +7,7 @@ import { login, registration } from '../../API/userAPI';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../..';
 import { SHOP_ROUTE } from '../../utils/consts';
-
+import SaveModal from '../../components/UI/SaveModal/SaveModal';
 const Auth = observer(() => {
   const { user } = useContext(Context);
   const location = useLocation();
@@ -15,27 +15,36 @@ const Auth = observer(() => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
-  console.log('Это страница логина '+ isLogin);
+  const [error, setError] = useState(false);
+  const [isSave, setIsSave] = useState(false);
+  const [message, setMessage] = useState('');
   const click = async () => {
-    let data;
-    if (isLogin) {
-      data = await login(email, password);
-      console.log('При логине вот это выходит: ');
-      console.log(data);
-    } else {
-      data = await registration(email, password);
-      console.log(data);
+    try {
+      setIsSave(true);
+
+      let data;
+      if (isLogin) {
+        data = await login(email, password);
+      } else {
+        data = await registration(email, password);
+      }
+      user.setUser(data);
+      user.setIsAuth(true);
+      setError(false);
+      navigate(SHOP_ROUTE + '/all');
+    } catch (err) {
+      setError(true);
+      setMessage(err.response.data.message);
     }
-    user.setUser(data);
-    user.setIsAuth(true);
-    console.log(user.isAuth);
-    navigate(SHOP_ROUTE + '/all');
-    console.log('после нажатия');
   };
 
   return (
     <div className={s.container}>
+      {isSave ? (
+        <SaveModal setIsSave={setIsSave} error={error}>
+          {message}
+        </SaveModal>
+      ) : null}
       <div className={s['login-form']}>
         <h2 className={s['login-heading']}>
           {isLogin ? 'Авторизация' : 'Регистрация'}

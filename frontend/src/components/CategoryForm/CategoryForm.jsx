@@ -17,7 +17,7 @@ function CategoryForm({ setVisible, fetchCategory }) {
         <input
           type='text'
           id='name'
-          placeholder='Введите название продукта'
+          placeholder='Введите название категории'
           value={newCategory.Name}
           onChange={event =>
             setNewCategory({ ...newCategory, Name: event.target.value })
@@ -28,7 +28,7 @@ function CategoryForm({ setVisible, fetchCategory }) {
       <div className={styles.formGroup}>
         <label htmlFor='description'>Описание:</label>
         <textarea
-          placeholder='Введите описание продукта'
+          placeholder='Введите описание категории'
           id='description'
           value={newCategory.Description}
           onChange={event =>

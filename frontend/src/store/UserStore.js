@@ -4,6 +4,7 @@ export default class UserStore {
   constructor() {
     this._isAuth = false;
     this._user = {};
+    this.basket = [];
     makeAutoObservable(this);
   }
 
@@ -14,7 +15,6 @@ export default class UserStore {
   setUser(user) {
     this._user = user;
   }
-
   get isAuth() {
     return this._isAuth;
   }
@@ -24,4 +24,10 @@ export default class UserStore {
   get getRole() {
     return this.user.RoleId;
   }
+  get getbasket() {
+    return this.basket;
+  }
+  addToBasket(ProductId, Count) {}
+  deleteFromBasket(ProductId, Count) {}
+  updateBasket(ProductId, Count) {}
 }

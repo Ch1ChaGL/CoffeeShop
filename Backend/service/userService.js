@@ -16,6 +16,15 @@ class UserService {
     const user = await User.findOne({ where: { UserId: id } });
     return user;
   }
+  async updateById(id, FirstName, LastName) {
+    const user = await User.update(
+      { FirstName, LastName },
+      {
+        where: { UserId: id },
+      },
+    );
+    return user;
+  }
 }
 
 module.exports = new UserService();

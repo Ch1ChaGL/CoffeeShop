@@ -21,7 +21,7 @@ class ShopController {
     return res.json(shop);
   }
 
-  async delete(req, res) {
+  async delete(req, res, next) {
     const { id } = req.params;
 
     if (!id) return next(ApiErorr.badRequest('Не указан id'));

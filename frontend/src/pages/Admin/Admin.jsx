@@ -9,6 +9,7 @@ import AdminProducts from './AdminProducts/AdminProducts';
 import AdminCategory from './AdminCategory/AdminCategory';
 import AdminOrders from './AdminOrders/AdminOrders';
 import { observer } from 'mobx-react-lite';
+import AdminShops from './AdminShops/AdminShops';
 const Admin = () => {
   const location = useLocation();
   const page = location.pathname.split('/').slice(-1)[0];
@@ -16,6 +17,9 @@ const Admin = () => {
   let componentToRender;
 
   switch (page) {
+    case 'shops':
+      componentToRender = <AdminShops />;
+      break;
     case 'products':
       componentToRender = <AdminProducts />;
       break;

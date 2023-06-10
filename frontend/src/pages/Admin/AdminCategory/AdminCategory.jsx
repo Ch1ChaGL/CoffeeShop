@@ -29,7 +29,7 @@ function AdminCategory() {
           category={category}
           categorys={categorys}
           setCategorys={setCategorys}
-          key={category.ProductId}
+          key={category.CategoryId}
         />
       ))}
     </div>

@@ -2,9 +2,6 @@ import React from 'react';
 import s from './CategoryCard.module.css';
 import CategoryService from '../../../../API/CategoryService';
 function CategoryCard({ category, categorys, setCategorys }) {
-  console.log('Category card');
-  console.log(category);
-
   const deleteCategory1 = async () => {
     await CategoryService.deleteCategory(category.CategoryId);
     setCategorys(categorys.filter(c => c.CategoryId !== category.CategoryId));

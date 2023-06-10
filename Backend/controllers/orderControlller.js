@@ -31,7 +31,7 @@ class OrderController {
         if (orders.length === 0)
           return next(
             ApiErorr.badRequest(
-              `Заказы данного пользователя (${UserId}) не найдены`,
+              `Заказы данного магазина (${UserId}) не найдены`,
             ),
           );
       }

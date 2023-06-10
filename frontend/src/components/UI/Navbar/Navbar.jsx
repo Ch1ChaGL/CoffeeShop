@@ -9,6 +9,7 @@ import {
   FAQ_ROUTE,
   LOGIN_ROUTE,
   MAIN_ROUTE,
+  PROFILE_ROUTE,
   REGISTRATION_ROUTE,
   SHOP_ROUTE,
 } from '../../../utils/consts';
@@ -49,7 +50,8 @@ const Navbar = observer(() => {
       ) : (
         <></>
       )}
-
+      {user.isAuth ? <CustomLink to={MAIN_ROUTE}>Корзина</CustomLink> : <></>}
+      {user.isAuth ? <CustomLink to={PROFILE_ROUTE}>Профиль</CustomLink> : <></>}
       {user.isAuth ? (
         <button className={s.logout} onClick={logautClick}>
           Выход

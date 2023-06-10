@@ -1,0 +1,25 @@
+.container {
+  padding: 20px;
+}
+.link {
+  display: block;
+  padding: 20px;
+  border-radius: 30px;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+  background-color: rgb(80, 117, 191);
+  margin-bottom: 15px;
+  font-size: 20px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+}
+.link:hover {
+  background-color: rgb(120, 157, 231);
+  transform: translateY(-3px);
+}
+.link:active {
+  background-color: rgb(120, 157, 231);
+  transform: translateY(1px); /* Сдвиг кнопки вниз при нажатии */
+}

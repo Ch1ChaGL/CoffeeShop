@@ -1,0 +1,71 @@
+/* Стили для контейнера страницы */
+.pageContainer {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 3fr 10fr;
+  grid-template-rows: 60px 1fr;
+  gap: 20px;
+  grid-template-areas:
+    'sidebar content'
+    'sidebar content';
+}
+
+/* Стили для блока сайдбара */
+.sidebar {
+  grid-area: sidebar;
+  background-color: #041f5c;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+/* Стили для блока с товарами */
+.contentBlock {
+  height: 100%;
+  grid-area: content;
+  background-color: #407a97;
+  border-radius: 30px;
+  padding: 20px;
+}
+.page {
+  height: 100%;
+}
+
+.profile {
+  max-width: 100%;
+}
+
+.heading {
+  color: white;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.button {
+  background-color: #0c5cb1;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+}
+.button:hover {
+  background-color: rgb(21, 33, 162);
+}

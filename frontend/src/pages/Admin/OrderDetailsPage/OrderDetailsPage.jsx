@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import s from './OrderDetailsPage.module.css';
 import Container from '../../../components/Container/Container';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import OrderService from '../../../API/OrderService';
 import ProductService from '../../../API/ProductService';
 import Card from './Card/Card';
 import SaveModal from '../../../components/UI/SaveModal/SaveModal';
+import { ADMIN_ROUTE } from '../../../utils/consts';
 const OrderDetailsPage = () => {
   const location = useLocation();
   const orderId = parseInt(location.pathname.split('/').slice(-1)[0]);
@@ -19,7 +20,7 @@ const OrderDetailsPage = () => {
   const [Address, setAddress] = useState('');
   const [message, setMessage] = useState('');
   const [orderStatus, setOrderStatus] = useState(0);
-
+  const navigate = useNavigate();
   useEffect(() => {
     fetchOrder();
   }, []);
@@ -71,6 +72,14 @@ const OrderDetailsPage = () => {
       setError(true);
     }
   };
+  const deleteOrder = async () => {
+    try {
+      await OrderService.delete(orderId);
+      navigate(ADMIN_ROUTE + '/orders');
+    } catch (err) {
+      alert(err.response.data.message);
+    }
+  };
   return (
     <Container>
       {isSave ? (
@@ -107,14 +116,25 @@ const OrderDetailsPage = () => {
           </div>
         </div>
         {orderStatus === 1 ? (
-          <button className={s.cancellation} onClick={handleCancellation}>
+          <button
+            className={s.cancellation}
+            onClick={handleCancellation}
+            style={{ marginBottom: '20px' }}
+          >
             Отмена
           </button>
         ) : (
-          <button className={s.closeButton} onClick={handleCloseOrder}>
+          <button
+            className={s.closeButton}
+            onClick={handleCloseOrder}
+            style={{ marginBottom: '20px' }}
+          >
             Закрыть заказ
           </button>
         )}
+        <button className={s.cancellation} onClick={deleteOrder}>
+          Удалить
+        </button>
         <h1 className={s.labelItems}>Позиции в заказе</h1>
         {products.map(product => (
           <Card product={product} key={product.ProductId} />

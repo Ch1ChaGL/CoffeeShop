@@ -1,7 +1,6 @@
 .card {
   display: flex;
   align-items: center;
-
   padding: 20px;
   border-radius: 8px;
   background-color: #ffffff;
@@ -20,7 +19,6 @@
 .content {
   flex-grow: 1;
   display: flex;
-  align-items: center;
   justify-content: space-between;
 }
 
@@ -39,10 +37,9 @@
 .buttons {
   display: flex;
   justify-content: space-between;
-  align-self: center;
 }
 
-.check {
+.buttonDelete {
   display: inline-block;
   padding: 8px 16px;
   border-radius: 4px;
@@ -54,22 +51,10 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }
-
-.check:hover {
-  background-color: #45971f;
-}
-.status {
-  font-size: 18px;
-
-  text-align: center;
+.buttonDelete {
+  background-color: #be531e;
 }
 
-.cost {
-  font-size: 18px;
-  flex: 0 0 100px;
-  text-align: right;
-}
-
-.about {
-  flex: 0 1 200px;
+.buttonDelete:hover {
+  background-color: #6d3113;
 }
