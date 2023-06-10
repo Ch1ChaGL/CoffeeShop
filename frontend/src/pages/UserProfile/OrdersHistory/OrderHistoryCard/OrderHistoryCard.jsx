@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import s from './OrderHistoryCard.module.css';
 import ShopService from '../../../../API/ShopService';
 import ProductService from '../../../../API/ProductService';
+import Spinner from '../../../../components/UI/Spinner/Spinner';
 function OrderHistoryCard({ order }) {
   const [orderCost, setOrderCost] = useState(0);
   const isoDate = order.createdAt;
   const date = new Date(isoDate);
   const [address, setAddress] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const options = {
     year: 'numeric',
     month: 'long',
@@ -20,8 +22,10 @@ function OrderHistoryCard({ order }) {
   const formattedDate = date.toLocaleString('ru-RU', options);
 
   useEffect(() => {
-    fetchAddress();
-    fetchCost();
+    setIsLoading(true);
+    Promise.all([fetchAddress(), fetchCost()]).finally(() => {
+      setIsLoading(false);
+    });
   }, []);
 
   const fetchAddress = async () => {
@@ -33,6 +37,9 @@ function OrderHistoryCard({ order }) {
     setOrderCost(costs);
   };
 
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div className={s.card}>
       <div className={s.content}>

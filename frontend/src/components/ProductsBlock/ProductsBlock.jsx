@@ -5,14 +5,18 @@ import { useState, useEffect } from 'react';
 import ProductService from '../../API/ProductService';
 import { useLocation } from 'react-router-dom';
 import { useProducts } from '../../hooks/useProducts';
+import Spinner from '../UI/Spinner/Spinner';
 
 function ProductsBlock({ searchQuery, sort }) {
   const location = useLocation();
   const category = location.pathname.split('/').slice(-1)[0];
   const [products, setProducts] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    fetchProducts();
+    setIsLoading(true);
+    Promise.all([fetchProducts()]).then(() => {
+      setIsLoading(false);
+    });
   }, []);
 
   async function fetchProducts() {
@@ -30,7 +34,9 @@ function ProductsBlock({ searchQuery, sort }) {
     sort,
     searchQuery,
   );
-
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div className={s.gridСontainer}>
       {filteredProducts.map(product => (

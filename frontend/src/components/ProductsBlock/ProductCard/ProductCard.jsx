@@ -12,7 +12,9 @@ function ProductCard({ product }) {
   const click = () => {
     if (user.isAuth === false) {
       navigate(LOGIN_ROUTE);
+      return;
     }
+    user.addToBasket(product, count);
   };
 
   return (

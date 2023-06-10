@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import {
   ABOUT_ROUTE,
   ADMIN_ROUTE,
+  BASKET_ROUTE,
   FAQ_ROUTE,
   LOGIN_ROUTE,
   MAIN_ROUTE,
@@ -50,7 +51,7 @@ const Navbar = observer(() => {
       ) : (
         <></>
       )}
-      {user.isAuth ? <CustomLink to={MAIN_ROUTE}>Корзина</CustomLink> : <></>}
+      {user.isAuth ? <CustomLink to={BASKET_ROUTE}>Корзина</CustomLink> : <></>}
       {user.isAuth ? <CustomLink to={PROFILE_ROUTE}>Профиль</CustomLink> : <></>}
       {user.isAuth ? (
         <button className={s.logout} onClick={logautClick}>
