@@ -40,7 +40,7 @@ function ProductCard({ product, setIsSave }) {
             type='number'
             min='1'
             value={count}
-            onChange={e => setCount(e.target.value)}
+            onChange={e => setCount(parseInt(e.target.value))}
             className={s.count}
           />
           <Buy text={'Купить'} onClick={click} />
