@@ -24,9 +24,13 @@
 .oldOrder:hover {
   background-color: #a13327;
 }
-.all{
+.all {
   background-color: #2850b7;
 }
-.all:hover{
+.all:hover {
   background-color: #193886;
+}
+.nothingOrders {
+  font-size: 30px;
+  color: white;
 }

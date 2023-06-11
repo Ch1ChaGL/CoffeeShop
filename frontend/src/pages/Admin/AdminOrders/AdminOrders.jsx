@@ -5,6 +5,7 @@ import OrderService from '../../../API/OrderService';
 import MyInput from '../../../components/UI/MyInput/MyInput';
 import { useOrders } from '../../../hooks/useOrders';
 function AdminOrders() {
+  const [error, setError] = useState(false);
   const [sort, setSort] = useState('all');
   const [orders, setOrders] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,8 +14,12 @@ function AdminOrders() {
   }, []);
 
   const fetchOrders = async () => {
-    const orders = await OrderService.getAllOrder();
-    setOrders(orders);
+    try {
+      const orders = await OrderService.getAllOrder();
+      setOrders(orders);
+    } catch {
+      setError(true);
+    }
   };
   const sortedOrders = useOrders(orders, searchQuery, sort);
 
@@ -39,9 +44,13 @@ function AdminOrders() {
         </div>
       </div>
       <div className={s.orders}>
-        {sortedOrders.map(order => {
-          return <AdminOrderCard key={order.OrderId} order={order} />;
-        })}
+        {error === false ? (
+          sortedOrders.map(order => {
+            return <AdminOrderCard key={order.OrderId} order={order} />;
+          })
+        ) : (
+          <div className={s.nothingOrders}>Нет заказов</div>
+        )}
       </div>
     </div>
   );

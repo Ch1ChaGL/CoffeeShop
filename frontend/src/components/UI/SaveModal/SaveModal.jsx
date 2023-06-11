@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import s from './SaveModal.module.css';
 
-function SaveModal({ setIsSave, children, error }) {
+function SaveModal({ setIsSave, children, error, setMessage }) {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -11,6 +11,9 @@ function SaveModal({ setIsSave, children, error }) {
       setShowModal(false);
       setTimeout(() => {
         setIsSave(false);
+        if (setMessage) {
+          setMessage('');
+        }
       }, 1000);
     }, 1000);
     return () => clearTimeout(timer);

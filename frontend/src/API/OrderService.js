@@ -31,4 +31,8 @@ export default class OrderService {
     const response = await $authHost.put(`/api/order/unclose?OrderId=${id}`);
     return response.data;
   }
+  static async createOrder(order) {
+    const response = await $authHost.post('/api/order', order);
+    return response.data;
+  }
 }

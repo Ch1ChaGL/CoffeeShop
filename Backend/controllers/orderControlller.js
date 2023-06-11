@@ -1,3 +1,4 @@
+const e = require('express');
 const ApiErorr = require('../error/ApiError');
 const orderService = require('../service/orderService');
 
@@ -5,6 +6,12 @@ class OrderController {
   async createOrder(req, res, next) {
     try {
       const { UserId, Products, ShopId } = req.body;
+      console.log('UserId');
+      console.log(UserId);
+      console.log('Products');
+      console.log(Products);
+      console.log('ShopId');
+      console.log(ShopId);
       if (!UserId || Products.length === 0 || !Products || !ShopId)
         return next(
           ApiErorr.badRequest(
@@ -13,12 +20,12 @@ class OrderController {
         );
 
       const createdOrder = await orderService.create(UserId, ShopId, Products);
-
       if (!createdOrder)
         return next(ApiErorr.badRequest('Не удалось создать заказ'));
 
       return res.status(201).json(createdOrder);
     } catch (err) {
+      console.log('Ошибка тут');
       return next(err);
     }
   }

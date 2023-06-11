@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { LOGIN_ROUTE } from '../../../utils/consts';
 import { Context } from '../../..';
 import { authRoutes } from '../../../router';
-function ProductCard({ product }) {
+function ProductCard({ product, setIsSave }) {
   const { user } = useContext(Context);
   const [count, setCount] = useState(1);
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ function ProductCard({ product }) {
       navigate(LOGIN_ROUTE);
       return;
     }
+    setIsSave(true);
     user.addToBasket(product, count);
   };
 

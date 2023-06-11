@@ -21,7 +21,6 @@ const Auth = observer(() => {
   const click = async () => {
     try {
       setIsSave(true);
-
       let data;
       if (isLogin) {
         data = await login(email, password);
@@ -40,8 +39,8 @@ const Auth = observer(() => {
 
   return (
     <div className={s.container}>
-      {isSave ? (
-        <SaveModal setIsSave={setIsSave} error={error}>
+      {isSave && message.length !== 0 ? (
+        <SaveModal setIsSave={setIsSave} error={error} setMessage={setMessage}>
           {message}
         </SaveModal>
       ) : null}

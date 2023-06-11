@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import s from './BasketCard.module.css';
 import ProductService from '../../../API/ProductService';
 import { Context } from '../../..';
@@ -13,7 +13,7 @@ function BasketCard({
   const { user } = useContext(Context);
   const [count, setCount] = useState(parseInt(product.Count));
   const plus = async () => {
-    setCount(count + 1);
+    setCount(parseInt(count) + 1);
     await updateBasket(product, count + 1);
     setProducts(user.getbasket);
     fetchTotalCost(user.getbasket);
@@ -26,9 +26,22 @@ function BasketCard({
     fetchTotalCost(user.getbasket);
   };
   const deletePosition = () => {
+    console.log('product.ProductId');
+    console.log(product.ProductId);
     deleteFromBasket(product.ProductId);
+    console.log(products.filter(p => p.ProductId !== product.ProductId));
+    console.log('user.getbasket');
+    console.log(user.getbasket);
     setProducts(products.filter(p => p.ProductId !== product.ProductId));
     fetchTotalCost(user.getbasket);
+  };
+
+  useEffect(() => {
+    updateBasket(product, count);
+    fetchTotalCost(user.getbasket);
+  }, [count]);
+  const onChange = async e => {
+    setCount(parseInt(e.target.value));
   };
   return (
     <div className={s.card}>
@@ -49,7 +62,7 @@ function BasketCard({
               type='number'
               className={s.countInOrder}
               value={count}
-              onChange={e => setCount(e.target.value)}
+              onChange={onChange}
               min={'1'}
             />
             <button className={`${s.button} ${s.plus}`} onClick={plus}>

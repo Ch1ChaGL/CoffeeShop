@@ -44,12 +44,17 @@ export default class UserStore {
     }
     this.saveBasketToLocalStorage();
   }
-  deleteFromBasket(ProductId) {
+  deleteFromBasketById(ProductId) {
     console.log('this.basket');
     console.log(this.getbasket);
     this.basket = this.basket.filter(item => item.ProductId !== ProductId);
     this.saveBasketToLocalStorage();
   }
+  deleteFromBasket() {
+    this.basket = [];
+    this.saveBasketToLocalStorage();
+  }
+
   updateBasket(product, Count) {
     console.log(this);
     this.basket = this.basket.map(item => {
