@@ -4,7 +4,7 @@ import Shop from '../pages/Shop/Shop';
 import Auth from '../pages/Auth/Auth';
 import ProductPage from '../pages/ProductPage/ProductPage';
 import Main from '../pages/Main/Main';
-import FAQ from '../pages/FAQ';
+import FAQ from '../pages/FAQ/FAQ';
 import About from '../pages/About';
 import {
   ABOUT_ROUTE,

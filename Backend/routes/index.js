@@ -7,9 +7,7 @@ const roleRouter = require('./roleRouter');
 const shopRouter = require('./shopRouter');
 const stockRouter = require('./stockRouter');
 const userRouter = require('./userRouter');
-
-
-
+const sendmailRouter = require('./sendmailRouter');
 
 router.use('/user', userRouter);
 router.use('/role', roleRouter);
@@ -18,6 +16,6 @@ router.use('/shop', shopRouter);
 router.use('/category', categoryRouter);
 router.use('/stock', stockRouter);
 router.use('/product', productRouter);
-
+router.use('/sendmail', sendmailRouter);
 
 module.exports = router;
