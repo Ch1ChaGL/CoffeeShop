@@ -4,7 +4,6 @@ import { Context } from '../../..';
 import { logout } from '../../../API/userAPI';
 import { observer } from 'mobx-react-lite';
 import {
-  ABOUT_ROUTE,
   ADMIN_ROUTE,
   BASKET_ROUTE,
   FAQ_ROUTE,
@@ -33,16 +32,8 @@ const Navbar = observer(() => {
         <img src='/img/LOGO.png'></img>
       </CustomLink>
       <CustomLink to={MAIN_ROUTE}>Главная</CustomLink>
-      <CustomLink to={ABOUT_ROUTE}>О нас</CustomLink>
       <CustomLink to={SHOP_ROUTE + '/all'}>Купить</CustomLink>
-      <CustomLink
-        style={{
-          marginRight: '230px',
-        }}
-        to={FAQ_ROUTE}
-      >
-        Обратная связь
-      </CustomLink>
+      <CustomLink to={FAQ_ROUTE}>Обратная связь</CustomLink>
 
       {user.getRole === 1 ? (
         <button className={s.admin} onClick={() => navigate(ADMIN_ROUTE)}>
@@ -52,7 +43,11 @@ const Navbar = observer(() => {
         <></>
       )}
       {user.isAuth ? <CustomLink to={BASKET_ROUTE}>Корзина</CustomLink> : <></>}
-      {user.isAuth ? <CustomLink to={PROFILE_ROUTE}>Профиль</CustomLink> : <></>}
+      {user.isAuth ? (
+        <CustomLink to={PROFILE_ROUTE}>Профиль</CustomLink>
+      ) : (
+        <></>
+      )}
       {user.isAuth ? (
         <button className={s.logout} onClick={logautClick}>
           Выход

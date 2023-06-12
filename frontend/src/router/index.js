@@ -56,7 +56,6 @@ export const adminRoutes = [
 
 export const publicRoutes = [
   { path: FAQ_ROUTE, component: <FAQ /> },
-  { path: ABOUT_ROUTE, component: <About /> },
   { path: MAIN_ROUTE, component: <Main /> },
   { path: SHOP_ROUTE, component: <Shop /> },
   { path: SHOP_ROUTE + '/:id', component: <Shop /> },
