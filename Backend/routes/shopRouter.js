@@ -8,6 +8,10 @@ router.post('/',checkRole(1), shopController.createShop);
 router.get('/', shopController. getAll);
 router.get('/:id', shopController.getOne);
 
+
+router.get('/stat/getStat', shopController.getStat);
+
+
 router.delete('/:id', checkRole(1), shopController.delete);
 
 module.exports = router;

@@ -1,4 +1,5 @@
 const shopService = require('../service/shopService');
+const ReportGenerator = require('../service/statService');
 const ApiErorr = require('../error/ApiError');
 
 class ShopController {
@@ -31,6 +32,44 @@ class ShopController {
       return next(ApiErorr.badRequest('Не существует магазина с таким id'));
 
     return res.json({ message: 'Магазин удален' });
+  }
+
+
+  async getStat(req, res, next) {
+    console.log('Я тут');
+    
+      const [
+        salesByShop,
+        popularProducts,
+        userOrders,
+        inventory,
+        orderStatus,
+        salesByCategory,
+        shopPerformance,
+      ] = await Promise.all([
+        ReportGenerator.getSalesByShopReport(),
+        ReportGenerator.getPopularProductsReport(),
+        ReportGenerator.getUserOrderReport(),
+        ReportGenerator.getInventoryReport(),
+        ReportGenerator.getOrderStatusReport(),
+        ReportGenerator.getSalesByCategoryReport(),
+        ReportGenerator.getShopPerformanceReport(),
+      ]);
+  
+      const fullReport = {
+        ...salesByShop,
+        ...popularProducts,
+        ...userOrders,
+        ...inventory,
+        ...orderStatus,
+        ...salesByCategory,
+        ...shopPerformance,
+        generatedAt: new Date().toISOString(),
+      };
+  
+      console.log(fullReport);
+      res.json(fullReport);
+    
   }
 }
 

@@ -22,6 +22,7 @@ import ChangeProduct from '../pages/Admin/AdminProducts/AdminProductCard/ChangeP
 import OrderDetailsPage from '../pages/Admin/OrderDetailsPage/OrderDetailsPage';
 import AdminShops from '../pages/Admin/AdminShops/AdminShops';
 import UserProfile from '../pages/UserProfile/UserProfile';
+import AdminStat from '../pages/Admin/AdminStat/AdminStat';
 
 export const authRoutes = [
   { path: BASKET_ROUTE, component: <Basket /> },
@@ -52,6 +53,7 @@ export const adminRoutes = [
   { path: ADMIN_ROUTE + '/orders', component: <Admin />, name: 'Заказы' },
   { path: ADMIN_ROUTE + '/shops', component: <Admin />, name: 'Магазины' },
   { path: ADMIN_ROUTE + '/orders/:id', component: <OrderDetailsPage /> },
+  { path: ADMIN_ROUTE + '/stat', component: <Admin/>, name: 'Статистика' },
 ];
 
 export const publicRoutes = [

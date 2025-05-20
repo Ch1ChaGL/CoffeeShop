@@ -29,12 +29,18 @@ const Navbar = observer(() => {
   return (
     <nav className={s.row}>
       <CustomLink to={MAIN_ROUTE}>
-        <img src='/img/LOGO.png'></img>
+        <img src='https://nskfloraopt.ru/local/templates/eshop_bootstrap_green/media/img/logo-new.png'></img>
       </CustomLink>
       <CustomLink to={MAIN_ROUTE}>Главная</CustomLink>
       <CustomLink to={SHOP_ROUTE + '/all'}>Купить</CustomLink>
       <CustomLink to={FAQ_ROUTE}>Обратная связь</CustomLink>
 
+      {user.isAuth ? <CustomLink to={BASKET_ROUTE}>Корзина</CustomLink> : <></>}
+      {user.isAuth ? (
+        <CustomLink to={PROFILE_ROUTE}>Профиль</CustomLink>
+      ) : (
+        <></>
+      )}
       {user.getRole === 1 ? (
         <button className={s.admin} onClick={() => navigate(ADMIN_ROUTE)}>
           Админ панель
@@ -42,12 +48,7 @@ const Navbar = observer(() => {
       ) : (
         <></>
       )}
-      {user.isAuth ? <CustomLink to={BASKET_ROUTE}>Корзина</CustomLink> : <></>}
-      {user.isAuth ? (
-        <CustomLink to={PROFILE_ROUTE}>Профиль</CustomLink>
-      ) : (
-        <></>
-      )}
+
       {user.isAuth ? (
         <button className={s.logout} onClick={logautClick}>
           Выход

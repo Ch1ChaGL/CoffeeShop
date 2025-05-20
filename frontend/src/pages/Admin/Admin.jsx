@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom';
 import AdminProducts from './AdminProducts/AdminProducts';
 import AdminCategory from './AdminCategory/AdminCategory';
 import AdminOrders from './AdminOrders/AdminOrders';
+import AdminStat from './AdminStat/AdminStat';
 import { observer } from 'mobx-react-lite';
 import AdminShops from './AdminShops/AdminShops';
 const Admin = () => {
@@ -29,6 +30,9 @@ const Admin = () => {
     case 'orders':
       componentToRender = <AdminOrders />;
       break;
+    case 'stat':
+        componentToRender = <AdminStat />;
+        break;
     default:
       componentToRender = <></>;
   }

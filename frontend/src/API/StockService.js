@@ -17,6 +17,7 @@ export default class StockService {
     return data[0].Count;
   }
   static async updateCount(ShopId, ProductId, Count) {
+    console.log('Я тут');
     const response = await $authHost.put(`api/stock`, {
       ShopId,
       ProductId,
