@@ -1,44 +1,163 @@
-/* Добавьте эти стили в ваш Main.module.css */
-
-.form-section {
-  margin-top: 60px;
-  padding: 30px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+.main {
+  padding: 40px 0;
 }
 
-.form-title {
-  text-align: center;
-  color: #2c3e50;
-  margin-bottom: 15px;
-  font-size: 28px;
+/* Герой секция */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
 }
 
-.form-description {
-  text-align: center;
-  color: #7f8c8d;
+.heroContent {
+  max-width: 600px;
+  z-index: 2;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #2a3a3f;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.heroText {
+  font-size: 1.1rem;
+  color: #5a6a6f;
   margin-bottom: 30px;
-  font-size: 16px;
+  line-height: 1.6;
 }
 
-.yandex-form {
+.heroButton {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #a58faa;
+  color: white;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid #a58faa;
+}
+
+.heroButton:hover {
+  background-color: transparent;
+  color: #a58faa;
+}
+
+.heroDecoration {
+  position: relative;
+  width: 400px;
+  height: 400px;
+}
+
+.flower {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #f8f1f9;
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  animation: float 8s ease-in-out infinite;
+}
+
+.leaf {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background-color: #e8d5e9;
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  top: 10%;
+  left: 10%;
+  animation: float 6s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+/* Секция с формой */
+.formSection {
+  padding: 80px 0;
+  background-color: #f9f9f9;
+  margin-top: 60px;
+  border-radius: 20px;
+}
+
+.formWrapper {
+  max-width: 800px;
   margin: 0 auto;
-  max-width: 650px;
+  text-align: center;
 }
 
-/* Адаптация для мобильных */
-@media (max-width: 768px) {
-  .form-section {
-    padding: 20px 15px;
+.formTitle {
+  font-size: 2rem;
+  color: #2a3a3f;
+  margin-bottom: 15px;
+}
+
+.formSubtitle {
+  font-size: 1.1rem;
+  color: #5a6a6f;
+  margin-bottom: 40px;
+}
+
+.formContainer {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.formIframe {
+  width: 100%;
+  min-height: 500px;
+  border: none;
+  border-radius: 10px;
+}
+
+/* Адаптация */
+@media (max-width: 992px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 0;
+  }
+
+  .heroDecoration {
+    width: 300px;
+    height: 300px;
     margin-top: 40px;
   }
-  
-  .form-title {
-    font-size: 24px;
+
+  .heroContent {
+    max-width: 100%;
   }
-  
-  .yandex-form {
-    width: 100%;
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.2rem;
+  }
+
+  .formSection {
+    padding: 50px 20px;
+    margin-top: 30px;
+  }
+
+  .formContainer {
+    padding: 20px 15px;
   }
 }

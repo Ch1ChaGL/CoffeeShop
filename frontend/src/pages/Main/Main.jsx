@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom';
 import { SHOP_ROUTE } from '../../utils/consts';
 
 function Main() {
-  // Эффект для загрузки скрипта Яндекс.Форм
   React.useEffect(() => {
     const script = document.createElement('script');
-    script.src = "https://forms.yandex.ru/_static/embed.js";
+    script.src = 'https://forms.yandex.ru/_static/embed.js';
     script.async = true;
     document.body.appendChild(script);
 
@@ -19,54 +18,42 @@ function Main() {
 
   return (
     <Container>
-      <div className={s['main-screen']} id='main-screen'>
-        <div className={s['container']}>
-          <div className={s['main-screen_row']}>
-            <div className={s['main-card']}>
-              <div className={s['main-card__row']}>
-                <div className={s['main-card__title']}>
-                  <h1>The Best Coffee For You</h1>
-                </div>
-                <div className={s['main-card__subtitle']}>
-                  <p>
-                    Добро пожаловать в наш интернет-магазин кофе, где ваше утро
-                    начнется с аромата и вкуса истинного наслаждения! Мы
-                    предлагаем вам широкий выбор высококачественных сортов кофе,
-                    чтобы удовлетворить даже самых изысканных любителей этого
-                    напитка
-                  </p>
-                </div>
-                <Link
-                  to={SHOP_ROUTE + 'all'}
-                  className={s['main-card__button']}
-                >
-                  В магазин
-                </Link>
-              </div>
-            </div>
-            <div className={s['main-image']}>
-              <img src='/img/2.jpg' alt='' />
-            </div>
-          </div>
-          
-          {/* Секция с формой */}
-          <div className={s['form-section']}>
-            <h2 className={s['form-title']}>Обратная связь</h2>
-            <p className={s['form-description']}>
-              Оставьте ваши вопросы или пожелания, и мы с вами свяжемся
+      <div className={s.main}>
+        <section className={s.hero}>
+          <div className={s.heroContent}>
+            <h1 className={s.heroTitle}>Цветочная Гармония</h1>
+            <p className={s.heroText}>
+              Превращаем ваши эмоции в изысканные цветочные композиции. Свежие
+              цветы, креативные букеты и индивидуальный подход к каждому
+              клиенту.
             </p>
-            <div className={s['yandex-form']}>
-              <iframe 
-                src="https://forms.yandex.ru/u/682c38c2505690a46eddae7d?iframe=1" 
-                frameBorder="0" 
-                name="ya-form-682c38c2505690a46eddae7d" 
-                width="100%" 
-                height="500"
-                title="Форма обратной связи"
+            <Link to={SHOP_ROUTE + 'all'} className={s.heroButton}>
+              Выбрать букет
+            </Link>
+          </div>
+          <div className={s.heroDecoration}>
+            <div className={s.flower}></div>
+            <div className={s.leaf}></div>
+          </div>
+        </section>
+
+        <section className={s.formSection}>
+          <div className={s.formWrapper}>
+            <h2 className={s.formTitle}>Не можете определиться?</h2>
+            <p className={s.formSubtitle}>
+              Пройдите наш тест и мы подберем идеальный цветок специально для
+              вас
+            </p>
+            <div className={s.formContainer}>
+              <iframe
+                src='https://forms.yandex.ru/cloud/682e09c349363953a6f721e2/?iframe=1" frameborder="0'
+                frameborder='0'
+                name='ya-form-ваш_идентификатор_формы'
+                className={s.formIframe}
               ></iframe>
             </div>
           </div>
-        </div>
+        </section>
       </div>
     </Container>
   );
